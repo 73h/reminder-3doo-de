@@ -1,18 +1,21 @@
 <%
-const now = new Date()
-const style = 'style="text-decoration:line-through;"'
+const now = new Date(2021,3,20)
+const style = 'style="text-decoration: line-through; color: #bbb;"'
 %>
 <!DOCTYPE html>
 <html>
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
   </head>
   <body>
     <h1><%= title %></h1>
     <%for (var index in events){ const event = events[index]%>
       <div <% if (now > event.start) {%><%-style%><%}%>>
-        <%= event.summary %> am <%= event.start.toLocaleDateString().replace(/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/,'$3.$2.$1') %>
+        <span style="width: 100px;display: inline-block;"><%= event.start.toLocaleDateString('de-DE') %></span><span><%= event.summary %></span>
       </div>
     <%}%>
   </body>
