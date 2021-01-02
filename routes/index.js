@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
+const google = require('../core/google.js')
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Reminder' });
+  google.getCalendar(
+    onSuccess = events => {
+      res.render('index', { title: 'Abfalltermine Kuckswinkel', events: events.reverse() });
+    },
+    onError = message => console.log(message)
+  )
 });
 
 module.exports = router;

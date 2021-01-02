@@ -1,3 +1,7 @@
+<%
+const now = new Date()
+const style = 'style="text-decoration:line-through;"'
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,11 +10,10 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-login="reminder_3doo_de_bot" data-size="large" data-radius="10" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
-    <script type="text/javascript">
-      function onTelegramAuth(user) {
-        alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
-      }
-    </script>
+    <%for (var index in events){ const event = events[index]%>
+      <div <% if (now > event.start) {%><%-style%><%}%>>
+        <%= event.summary %> am <%= event.start.toLocaleDateString().replace(/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/,'$3.$2.$1') %>
+      </div>
+    <%}%>
   </body>
 </html>
