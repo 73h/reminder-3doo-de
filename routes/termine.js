@@ -7,21 +7,22 @@ const google = require('../core/google.js')
 router.get('/', function(req, res, next) {
   google.getCalendar(
     onSuccess = events => {
-      let responseObject = []
+      let five_events = []
       const now = new Date()
       events.reverse().forEach(event => {
         if (now < event.start) {
-          if (responseObject.length < 5) {
+          if (five_events.length < 5) {
             let start = event.start.toLocaleString('en-US', {
               day: "2-digit",
               month: '2-digit',
               year: 'numeric'
             }).replace(/\//g,'.')
-            responseObject.push(`${event.summary} am ${start}`)
+            five_events.push(`${event.summary} am ${start}`)
           }
         }
       });
-      res.send("Die nächsten fünf Abholtermine sind:\r\n\r\n"+responseObject.join("\r\n"));
+      responseObject = {'five_dates': "Die nächsten fünf Abholtermine sind:\r\n\r\n"+five_events.join("\r\n")}
+      res.send(responseObject);
     },
     onError = message => console.log(message)
   )
