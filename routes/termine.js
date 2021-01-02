@@ -12,11 +12,11 @@ router.get('/', function(req, res, next) {
       events.reverse().forEach(event => {
         if (now < event.start) {
           if (five_events.length < 5) {
-            let start = event.start.toLocaleString('en-US', {
+            let start = event.start.toLocaleString('de-DE', {
               day: "2-digit",
               month: '2-digit',
               year: 'numeric'
-            }).replace(/\//g,'.')
+            }).replace(/([0-9]{4})-([0-9]{2})-([0-9]{2})/,'$3.$2.$1')
             five_events.push(`${event.summary} am ${start}`)
           }
         }
