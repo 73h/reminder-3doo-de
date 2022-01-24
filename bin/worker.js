@@ -31,6 +31,7 @@ google.getCalendar(
         color = (event.summary == 'Papiertonne' ? telegram.icons.blue : color)
         color = (event.summary == 'Pappe/Papier' ? telegram.icons.blue : color)
         color = (event.summary == 'Leichtverpackung' ? telegram.icons.yellow : color)
+        color = (event.summary == 'Leichtstoffverpackungen' ? telegram.icons.yellow : color)
         color = (event.summary == 'Hausmüll' ? telegram.icons.black : color)
         sendMessage(`${telegram.icons.garbage} ${color} Morgen wird ${event.summary} abgeholt.`)
       }
